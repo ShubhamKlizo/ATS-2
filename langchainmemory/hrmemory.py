@@ -20,19 +20,20 @@ conversation_chain = ConversationChain(llm=llm, memory=memory)
 
 
 # Get Technical questions from a resume
-def get_technical_questions(resume_text, job_description):
+def get_hr_questions(resume_text, job_description):
     # Construct a prompt that includes your instructions and the resume context.
     # This will be the new input for the chain.
     prompt = [
-        {"role": "system", "content": f'''
-                                            You are a technical lead at Klizo Solutions. 
-                                            Based on the candidate's resume below, create a list of **10 challenging technical interview questions** 
-                                            that assess the candidate's expertise in their field. Focus on areas of strength and any specialized skills mentioned.
-                                            According to the job description - [{job_description}].
+            {"role": "system", "content": f'''
+                                            You are a human resources assistant expert for the company Klizo Solutions and
+                                            You are an experienced HR professional at Klizo Solutions. 
+                                            Based on the candidate's resume below, generate a list of **10 insightful HR interview questions** 
+                                            that explore the candidate's fit for our company culture, work ethic, and soft skills and
+                                            According to the job description - [{job_description}]. 
                                             '''},
-        {"role": "assistant", "content": f"This is the Resume - [{resume_text}]."},
-        {"role": "user", "content": "Provide me Technical questions on this resume in relation with job description. Do not add Preamble. Provide me the questions in Proper Structure"}
-    ]
+            {"role":"assistant", "content": f"This is the Resume - [{resume_text}]."},
+            {"role": "user", "content": "Provide me HR questions on this resume in relation with job description. Do not add Preamble. Provide me the questions in Proper Structure"},
+        ]
     # Call the conversation chain.
     response = conversation_chain.predict(input=prompt)
 

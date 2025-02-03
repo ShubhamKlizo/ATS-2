@@ -1,7 +1,9 @@
 import streamlit as st
 from document_parse import get_file_details
-from get_hr_questions import get_hr_questions
-from get_technical_questions import get_technical_questions
+#from get_hr_questions import get_hr_questions
+#from get_technical_questions import get_technical_questions
+from langchainmemory.technicalmemory import get_technical_questions
+from langchainmemory.hrmemory import get_hr_questions
 
 # Initialize session state variables
 if 'uploaded_file' not in st.session_state:
