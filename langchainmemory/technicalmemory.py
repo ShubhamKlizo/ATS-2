@@ -20,7 +20,7 @@ conversation_chain = ConversationChain(llm=llm, memory=memory)
 
 
 # Get Technical questions from a resume
-def get_technical_questions(resume_text, job_description):
+def get_technical_questions(resume_text, job_description, input_question):
     # Construct a prompt that includes your instructions and the resume context.
     # This will be the new input for the chain.
     prompt = [
@@ -31,7 +31,7 @@ def get_technical_questions(resume_text, job_description):
                                             According to the job description - [{job_description}].
                                             '''},
         {"role": "assistant", "content": f"This is the Resume - [{resume_text}]."},
-        {"role": "user", "content": "Provide me Technical questions on this resume in relation with job description. Do not add Preamble. Provide me the questions in Proper Structure"}
+        {"role": "user", "content": f"{input_question}. Provide New unique questions Everytime. Do not add Preamble. Provide me the questions in Proper Structure"}
     ]
     # Call the conversation chain.
     response = conversation_chain.predict(input=prompt)
